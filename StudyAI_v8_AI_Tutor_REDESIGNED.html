@@ -253,4 +253,400 @@ body.dark .menuBtn{background:#111827;color:#fff;border-color:#29354d}
     <button class="drawerItem" data-route="classes">🎓 <span>Classes 6–12</span></button>
     <button class="drawerItem" data-route="subjects">📚 <span>Subjects</span></button>
     <button class="drawerItem" data-route="notes">📖 <span>Study Notes</span></button>
-    <button class="drawerItem" dat
+    <button class="drawerItem" data-route="quiz">🧠 <span>Practice Quiz</span></button>
+    <button class="drawerItem" data-route="papers">📝 <span>Chapter Papers</span></button>
+    <button class="drawerItem" data-route="ncert">📘 <span>NCERT Library</span></button>
+    <div class="drawerSection">AI</div>
+    <button class="drawerItem" data-route="tutor">✨ <span>AI Tutor</span></button>
+    <button class="drawerItem" data-route="settings">⚙️ <span>Settings</span></button>
+  </div>
+  <div class="themeRow">
+    <div><b>🌙 Dark mode</b><div class="muted">Easy on the eyes at night</div></div>
+    <label class="switch"><input type="checkbox" id="darkToggle"><span class="slider"></span></label>
+  </div>
+</aside>
+
+<!-- StudyAI cinematic intro -->
+<div id="studyaiSplash" class="studyai-splash" aria-label="StudyAI intro">
+  <img src="studyai-intro.webp" alt="StudyAI — Created by Mayank Sharma">
+  <button id="skipSplash" type="button">Skip intro</button>
+</div>
+<style>
+.studyai-splash{
+  position:fixed;inset:0;z-index:99999;background:#060b1b;
+  display:flex;align-items:center;justify-content:center;
+  opacity:1;visibility:visible;transition:opacity .65s ease,visibility .65s ease;
+}
+.studyai-splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+.studyai-splash img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+#skipSplash{
+  position:absolute;right:22px;bottom:20px;border:1px solid rgba(255,255,255,.22);
+  background:rgba(12,18,40,.72);color:#fff;padding:9px 14px;border-radius:999px;
+  font-weight:800;cursor:pointer;backdrop-filter:blur(8px);z-index:2;
+}
+#skipSplash:hover{background:rgba(99,91,255,.75)}
+body.splash-open{overflow:hidden}
+@media(max-width:600px){
+  #skipSplash{right:14px;bottom:14px;font-size:12px;padding:8px 12px}
+}
+</style>
+<script>const REAL_NOTES_DATA={"6": {"Mathematics": {"Knowing Our Numbers": "Place value, comparing large numbers, estimation and rounding. Use Indian place-value periods: ones, thousands, lakhs and crores.", "Whole Numbers": "Whole numbers start from 0. Addition and multiplication are closed on whole numbers; subtraction and division are not always closed.", "Playing with Numbers": "Factors divide a number exactly. Multiples are obtained by repeated multiplication. A prime number has exactly two factors: 1 and itself."}, "Science": {"The Wonderful World of Science": "Science begins with careful observation, questions, evidence and explanations. Record observations clearly and distinguish an observation from an inference.", "Materials Around Us": "Materials can be grouped by properties such as appearance, hardness, solubility, transparency and whether they float or sink.", "Methods of Separation": "Common separation methods include handpicking, sieving, filtration, sedimentation and decantation. Choose a method according to the property that differs."}, "English": {"Reading and Comprehension": "Read for the main idea, important details, sequence and meaning of unfamiliar words from context. Answer using evidence from the text.", "Grammar Basics": "A sentence normally has a meaningful structure. Identify nouns, pronouns, verbs, adjectives and adverbs by their function in the sentence.", "Writing Skills": "Plan before writing: purpose, audience, key points, order, and a final check for grammar and clarity."}}, "7": {"Mathematics": {"Integers": "Integers include negative numbers, zero and positive numbers. On a number line, numbers to the right are greater than numbers to the left.", "Fractions and Decimals": "For addition/subtraction of fractions, use a common denominator. Decimal operations follow place value.", "Data Handling": "Data can be organised in tables and represented using bar graphs or other suitable displays. Read labels and scales carefully."}, "Science": {"Nutrition in Plants": "Plants prepare food mainly by photosynthesis using carbon dioxide and water in the presence of light and chlorophyll.", "Heat": "Temperature tells how hot or cold something is. Heat flows from a higher-temperature object to a lower-temperature object.", "Acids, Bases and Salts": "Acids and bases have different properties and can be tested with indicators. Neutralisation is a reaction between an acid and a base."}, "English": {"Grammar": "Tense indicates time of an action or state. Keep subject and verb consistent in number.", "Comprehension": "Identify the central idea first, then locate supporting details and infer meaning only when the text supports it.", "Writing": "Use a clear opening, logically ordered points and a suitable closing. Edit for spelling and punctuation."}}, "8": {"Mathematics": {"Rational Numbers": "Rational numbers can be written as p/q where p and q are integers and q is not zero. Equivalent fractions represent the same rational number.", "Linear Equations": "Keep both sides balanced while solving. Perform the same valid operation on both sides and check the solution in the original equation.", "Comparing Quantities": "Percentage change can be found from the change relative to the original quantity, multiplied by 100."}, "Science": {"Crop Production": "Crop production involves soil preparation, sowing, adding nutrients, irrigation, protection from weeds and harvesting.", "Force and Pressure": "Force can change motion or shape. Pressure is force acting per unit area, so the same force can produce different pressures over different areas.", "Light": "Light travels in straight lines in a uniform medium. Reflection occurs when light returns from a surface."}, "English": {"Comprehension": "Separate facts directly stated in a passage from conclusions that require evidence-based inference.", "Grammar and Editing": "Check agreement, tense, articles, prepositions, punctuation and sentence structure during editing.", "Writing Skills": "Choose the format before drafting and keep the content relevant to the purpose and audience."}}, "9": {"Mathematics": {"Number Systems": "Rational numbers have terminating or recurring decimal expansions. Irrational numbers cannot be written as p/q with integers p and q, q≠0.", "Polynomials": "A polynomial is an algebraic expression with non-negative integer powers of the variable. Its degree is the highest power with a non-zero coefficient.", "Coordinate Geometry": "A point is represented by an ordered pair (x,y). The first coordinate gives horizontal position and the second gives vertical position."}, "Science": {"Matter in Our Surroundings": "Matter is made of particles and can exist as solids, liquids and gases. Temperature and pressure affect changes of state.", "Motion": "Speed is distance divided by time. Velocity includes direction. Acceleration describes change in velocity with time.", "Atoms and Molecules": "Atoms are basic units of elements; molecules contain atoms chemically bonded together. Chemical formulae represent composition."}, "English": {"Reading Skills": "Read for literal meaning, inference, tone and supporting evidence. Avoid conclusions not supported by the passage.", "Writing Skills": "Organise ideas into introduction, development and conclusion where appropriate. Match tone and format to the task.", "Grammar": "Use accurate tense, agreement, clauses, reported speech and punctuation according to sentence meaning."}}, "10": {"Mathematics": {"Real Numbers": "The Fundamental Theorem of Arithmetic states that every composite number can be expressed as a product of primes, uniquely apart from order.", "Polynomials": "For a quadratic polynomial ax²+bx+c, the sum of zeroes is −b/a and the product is c/a.", "Pair of Linear Equations": "A pair of linear equations can have one solution, no solution or infinitely many solutions depending on the relationships between coefficients.", "Quadratic Equations": "For ax²+bx+c=0, the discriminant D=b²−4ac determines the nature of roots: positive gives two distinct real roots, zero gives equal real roots, negative gives no real roots."}, "Science": {"Chemical Reactions": "A chemical reaction may involve a change in colour, temperature, state or gas formation. Balance equations so atoms of each element are conserved.", "Life Processes": "Nutrition, respiration, transport and excretion are key life processes. Their mechanisms support maintenance and survival of organisms.", "Light – Reflection and Refraction": "Reflection follows the law that angle of incidence equals angle of reflection. Refraction is bending associated with change in speed between media."}, "English": {"Reading": "Identify theme, tone, evidence, inference and the relationship between ideas rather than copying isolated words.", "Writing": "Formal writing needs a clear purpose, suitable tone, logical organisation and accurate language.", "Grammar": "Revise reported speech, modals, subject–verb agreement, tenses and editing through context-based practice."}}, "11": {"Mathematics": {"Sets": "A set is a well-defined collection of objects. Operations include union, intersection, difference and complement, subject to the universal set.", "Relations and Functions": "A relation connects elements of sets. A function assigns every element of its domain exactly one element of the codomain.", "Trigonometric Functions": "Use radians/degrees consistently. Fundamental identities include sin²x+cos²x=1 and related identities.", "Complex Numbers": "A complex number has the form a+ib, where i²=−1. Conjugates are useful for division and modulus."}, "Physics": {"Units and Measurements": "Physical quantities require numerical value and unit. Significant figures communicate measurement precision.", "Motion in a Straight Line": "Position, velocity and acceleration describe one-dimensional motion. For constant acceleration, use the standard kinematic relations consistently with signs.", "Motion in a Plane": "Vectors have magnitude and direction. Resolve vectors into components when solving two-dimensional motion."}, "Chemistry": {"Some Basic Concepts of Chemistry": "The mole links microscopic particles to measurable amount of substance. Use molar mass and balanced equations for stoichiometric calculations.", "Structure of Atom": "Electrons occupy quantised energy states. Atomic models evolved as experimental evidence improved.", "Classification of Elements": "The periodic table organises elements by atomic number and recurring chemical properties."}, "Biology": {"The Living World": "Biology studies living organisms and their interactions. Taxonomic categories organise biological diversity.", "Biological Classification": "Organisms are grouped using shared characteristics and evolutionary relationships.", "Plant Kingdom": "Major plant groups differ in body organisation, vascular tissue, seeds and reproductive structures."}}, "12": {"Mathematics": {"Relations and Functions": "A function maps each domain element to exactly one codomain element. Composition combines functions where the output domain permits.", "Inverse Trigonometric Functions": "Inverse trigonometric functions have restricted principal values so that each input has a single defined output.", "Matrices": "Matrices organise numbers in rows and columns. Matrix operations require compatible dimensions.", "Determinants": "A determinant is a scalar associated with a square matrix and can be used in solving systems and finding areas under appropriate conditions."}, "Physics": {"Electric Charges and Fields": "Electric field describes force per unit positive test charge. Superposition allows fields from multiple charges to be combined vectorially.", "Electrostatic Potential and Capacitance": "Potential difference is work done per unit charge. A capacitor stores electric charge and energy.", "Current Electricity": "Current is rate of flow of charge. Ohm's law relates potential difference, current and resistance for ohmic conductors under suitable conditions."}, "Chemistry": {"Solutions": "Concentration can be expressed in several ways such as molarity and molality. Choose the measure appropriate to the calculation and temperature conditions.", "Electrochemistry": "Electrochemical cells convert chemical and electrical energy. Oxidation occurs at the anode and reduction at the cathode.", "Chemical Kinetics": "Reaction rate depends on factors such as concentration, temperature and catalysts. Rate laws describe experimentally determined relationships."}, "Biology": {"Reproduction in Organisms": "Reproduction produces new individuals and can be sexual or asexual, with different biological consequences.", "Sexual Reproduction in Flowering Plants": "Flowering plants reproduce through structures such as stamens and carpels; pollination precedes fertilisation.", "Human Reproduction": "Human reproduction involves specialised reproductive organs, gamete formation, fertilisation and development."}}};</script>
+<script>
+(function(){
+  document.body.classList.add('splash-open');
+  function closeSplash(){
+    var s=document.getElementById('studyaiSplash');
+    if(!s || s.classList.contains('hide')) return;
+    s.classList.add('hide');
+    document.body.classList.remove('splash-open');
+    setTimeout(function(){ if(s.parentNode) s.parentNode.removeChild(s); }, 750);
+  }
+  window.addEventListener('load', function(){
+    setTimeout(closeSplash, 5400);
+  });
+  document.addEventListener('DOMContentLoaded', function(){
+    var b=document.getElementById('skipSplash');
+    if(b) b.addEventListener('click', closeSplash);
+  });
+})();
+</script>
+
+<div class="app">
+<aside class="side"><div class="brand">Study<i>AI</i><span class="brandSub">Student workspace</span></div><nav class="nav">
+<div class="navGroupTitle">Learn</div>
+<a href="#home"><span class="navIcon">🏠</span><span>Dashboard</span></a><a href="#classes"><span class="navIcon">🎓</span><span>Classes</span></a><a href="#subjects"><span class="navIcon">📚</span><span>Subjects</span></a><a href="#notes"><span class="navIcon">📖</span><span>Notes</span></a><a href="#ncert"><span class="navIcon">📘</span><span>NCERT</span></a><a href="#papers"><span class="navIcon">📝</span><span>Chapter Papers</span></a><a href="#quiz"><span class="navIcon">🧠</span><span>Quiz</span></a>
+<div class="navGroupTitle">AI & Tools</div>
+<a href="#tutor"><span class="navIcon">✨</span><span>AI Tutor</span></a><a href="#settings"><span class="navIcon">⚙️</span><span>Settings</span></a>
+</nav></aside>
+<main class="main">
+<section id="home" class="section active">
+<div class="heroHome" role="button" tabindex="0" aria-label="StudyAI animated welcome panel">
+  <div class="top" style="margin-bottom:0"><div><h1>Study smarter with StudyAI ✨</h1><p>Your Classes 6–12 study companion — notes, NCERT resources, practice papers, quizzes and an AI tutor.</p></div><span class="pill" id="classPill">Class 10</span></div>
+  <div class="heroActions">
+    <button class="btn" onclick="location.hash='classes'">Choose Class</button>
+    <button class="btn alt" onclick="location.hash='ncert'">Open NCERT</button>
+    <button class="btn alt" onclick="location.hash='tutor'">Ask AI Tutor</button>
+  </div>
+</div>
+<div id="quickStart" class="card" style="margin-bottom:15px">
+  <h2 style="margin:0 0 6px">Quick Start 🚀</h2>
+  <p class="muted">Choose a section from the left. Start with NCERT, open Notes, practise a Chapter Paper, or test yourself with Quiz.</p>
+  <div class="quickStartActions">
+    <button class="btn quickAction" onclick="location.hash='ncert'"><span class="quickIcon">📚</span><span><b>NCERT Library</b><small>Books & resources</small></span></button>
+    <button class="btn alt quickAction" onclick="location.hash='notes'"><span class="quickIcon">📖</span><span><b>Study Notes</b><small>Revise topics</small></span></button>
+    <button class="btn alt quickAction" onclick="location.hash='papers'"><span class="quickIcon">📝</span><span><b>Chapter Papers</b><small>Practice questions</small></span></button>
+    <button class="btn alt quickAction" onclick="location.hash='quiz'"><span class="quickIcon">🧠</span><span><b>Start Quiz</b><small>Test yourself</small></span></button>
+  </div>
+</div>
+<div class="grid"><div class="card stat"><span class="muted">Classes</span><b>6–12</b></div><div class="card stat"><span class="muted">Subjects</span><b>25+</b></div><div class="card stat"><span class="muted">Quiz score</span><b id="score">0%</b></div><div class="card stat"><span class="muted">Study streak</span><b id="streak">1 day</b></div></div>
+<h2>Continue learning</h2><div class="card"><b id="continueTitle">Mathematics</b><p class="muted">Build your concepts with notes, practice and AI explanations.</p><div class="progress"><span style="width:55%"></span></div><br><button class="btn" onclick="location.hash='tutor'">Ask AI Tutor</button></div>
+<h2>Quick start</h2><div class="cards"><div class="card click" onclick="location.hash='classes'"><div class="icon">🎓</div><h3>Choose class</h3><p class="muted">Classes 6–12</p></div><div class="card click" onclick="location.hash='notes'"><div class="icon">📖</div><h3>Study notes</h3><p class="muted">Topic summaries</p></div><div class="card click" onclick="location.hash='quiz'"><div class="icon">🏆</div><h3>Take quiz</h3><p class="muted">Test yourself</p></div><div class="card click" onclick="location.hash='tutor'"><div class="icon">🤖</div><h3>AI Tutor</h3><p class="muted">Ask a doubt</p></div></div></section>
+
+<section id="classes" class="section"><div class="top"><div><h1>Classes 6–12</h1><p class="muted">Choose your class.</p></div></div><div class="cards" id="classCards"></div></section>
+
+<section id="subjects" class="section"><div class="top"><div><h1>Subjects</h1><p class="muted">Choose class and subject.</p></div></div><div class="bar"><select id="subClass"></select><input id="subSearch" placeholder="Search subject" oninput="renderSubjects()"></div><div class="cards" id="subjectCards"></div></section>
+
+<section id="notes" class="section"><div class="top"><div><h1>Study Notes</h1><p class="muted">Starter notes are built in; expand them from the data section in the source.</p></div></div><div class="bar"><select id="noteClass"></select><select id="noteSubject"></select></div><div id="noteBox"></div></section>
+
+<section id="quiz" class="section"><div class="top"><div><h1>Practice Quiz</h1><p class="muted">Instant scoring and explanations.</p></div></div><div class="bar"><select id="quizClass"></select><button class="btn" onclick="makeQuiz()">New quiz</button></div><div id="quizBox"></div></section>
+
+
+<section id="ncert" class="section">
+<div class="ncertHero">
+<h1>NCERT Library — Classes 6–12</h1>
+<p>Use the official NCERT textbook portal for the current/new editions. StudyAI adds short-note, solution and practice layers around the books.</p>
+<div class="resourceRow"><a class="btn" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">Open Official NCERT Textbooks</a></div>
+</div>
+<div class="bar"><select id="ncertClass"></select><input id="ncertSearch" placeholder="Search subject/book" oninput="renderNCERT()"></div>
+<div class="ncertGrid" id="ncertCards"></div>
+<div class="card" style="margin-top:15px"><b>Copyright-safe design:</b> the app links to official NCERT books rather than copying entire textbooks. Your own notes can be added to StudyAI later.</div>
+</section>
+
+<section id="papers" class="section">
+<div class="top"><div><h1>Chapter Question Papers</h1><p class="muted">Practice papers generated from the selected class and subject. Your notes can later be used to create exact chapter-wise sets.</p></div></div>
+<div class="bar"><select id="paperClass"></select><select id="paperSubject"></select><button class="btn" onclick="makePaper()">Generate Paper</button></div>
+<div id="paperBox"></div>
+</section>
+<section id="tutor" class="section"><div class="top"><div><h1>AI Tutor 🤖</h1><p class="muted">Connected to your Gemini-powered backend.</p></div></div><div class="card chat"><div class="msgs" id="msgs"><div class="msg bot">Hi! I’m StudyAI. Ask me a school question. In demo mode I can answer common study prompts; with your backend endpoint I can become a full AI tutor.</div></div><div class="chatbar"><textarea id="chatText" rows="2" enterkeyhint="send" placeholder="e.g. Explain quadratic equations step by step"></textarea><button class="btn" onclick="send()">Send</button></div></div></section>
+
+<section id="settings" class="section"><div class="top"><div><h1>Settings</h1><p class="muted">Change the student's class and AI connection.</p></div></div><div class="card"><label>Student class</label><br><select id="setClass"></select><br><br><label>AI backend endpoint</label><br><input id="endpoint" style="width:100%" placeholder="https://your-site.com/api/chat"><br><br><label>AI instruction</label><br><textarea id="instruction" rows="5" style="width:100%">You are a friendly school tutor for Classes 6–12. Explain clearly and step-by-step. Adapt to the student's class.</textarea><br><br><button class="btn" onclick="save()">Save settings</button> <button class="btn alt" onclick="localStorage.clear();location.reload()">Reset</button></div></section>
+<div style="margin-top:24px;text-align:center;color:#8a93a8;font-size:12px">StudyAI • Classes 6–12 • Learn, practise, improve</div></main></div>
+<button class="floatTutor" onclick="toggleFloatTutor()" aria-label="Open AI Tutor"><span class="aiOrb"><span class="aiLetters">AI</span><i></i><em></em></span></button>
+<div class="tutorPop" id="tutorPop">
+ <div class="tutorHead"><span>StudyAI Tutor</span><button onclick="toggleFloatTutor()" style="border:0;background:transparent;color:white;font-size:20px">×</button></div>
+ <div class="tutorBody">
+  <div class="msgs floatMsgs" id="floatMsgs"><div class="msg bot">Screen par jo padh rahe ho, usme samajh nahi aaya? Ya koi doubt hai? Neeche likho, main turant help karunga.</div></div>
+  <div class="tutorActions">
+   <button onclick="floatExplain()">Haan, screen samjhao</button>
+   <button onclick="floatAsk()">Nahi, doubt puchna hai</button>
+  </div>
+  <div class="tutorInput"><input id="floatText" enterkeyhint="send" placeholder="Apna doubt likho"><button class="btn" onclick="floatSend()">Send</button></div>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const S={6:["Mathematics","Science","English","Hindi","Social Science","Computer","Sanskrit"],7:["Mathematics","Science","English","Hindi","Social Science","Computer","Sanskrit"],8:["Mathematics","Science","English","Hindi","Social Science","Computer","Sanskrit"],9:["Mathematics","Science","English","Hindi","Social Science","Computer","Sanskrit"],10:["Mathematics","Science","English","Hindi","Social Science","Computer","Sanskrit"],11:["Physics","Chemistry","Mathematics","Biology","English","Computer Science","Economics","Accountancy","Business Studies"],12:["Physics","Chemistry","Mathematics","Biology","English","Computer Science","Economics","Accountancy","Business Studies"]};
+const notes={Mathematics:"Key formulas, examples and chapter-wise revision should be added here. Use the AI Tutor to explain any concept step by step.",Science:"Revise definitions, diagrams, laws, equations and numerical applications. Use practice questions after each topic.",English:"Focus on reading comprehension, grammar, writing formats, literature themes and evidence-based answers.",Hindi:"अध्याय का सार, शब्दार्थ, व्याकरण और लेखन प्रारूप का अभ्यास करें।",Physics:"Learn definitions, units, laws and derivations, then practise numerical problems.",Chemistry:"Revise concepts, equations, reactions, periodic trends and numerical applications.",Biology:"Focus on diagrams, terminology, processes and cause-effect explanations.",Economics:"Understand concepts first, then practise data interpretation and application.",Accountancy:"Learn formats and rules, then solve complete questions with working.","Business Studies":"Use headings, keywords, examples and case-based application.",Computer:"Practise concepts, algorithms/programs and output-based questions."};
+const quiz=[["If 2x+3=11, x is?",["2","3","4","5"],2,"Subtract 3 and divide by 2."],["HCF of 18 and 24 is?",["3","6","9","12"],1,"6 divides both numbers and is the greatest common factor."],["Probability of a head on one fair coin toss?",["0","1/4","1/2","1"],2,"There are two equally likely outcomes."],["Slope of y=3x+2?",["2","3","-3","1/3"],1,"In y=mx+c, m is the slope."],["A triangle with all sides equal is?",["Scalene","Isosceles","Equilateral","Right"],2,"All three sides equal defines an equilateral triangle."]];
+function opts(){return Object.keys(S).map(x=>`<option>${x}</option>`).join("")}
+
+function route(){
+  const hash = (location.hash || "#home").replace("#","");
+  const target = document.getElementById(hash) ? hash : "home";
+  document.querySelectorAll(".section").forEach(el=>{
+    el.classList.toggle("active", el.id === target);
+  });
+  document.querySelectorAll("[data-route]").forEach(el=>{
+    el.classList.toggle("active", el.getAttribute("data-route") === target);
+  });
+  document.querySelectorAll(".drawerItem, .side .nav a").forEach(el=>{
+    const href = el.getAttribute("href") || "";
+    el.classList.toggle("active", href === "#"+target || el.dataset.route === target);
+  });
+  const title = document.getElementById("pageTitle");
+  if(title){
+    const names = {home:"Dashboard",subjects:"Subjects",notes:"Study Notes",quiz:"Practice Quiz",
+      papers:"Chapter Papers",ncert:"NCERT Library",tutor:"AI Tutor",settings:"Settings"};
+    title.textContent = names[target] || "StudyAI";
+  }
+}
+window.addEventListener("hashchange", route);
+
+
+function save(){
+  const endpoint = document.getElementById("endpoint");
+  const instruction = document.getElementById("instruction");
+  if(endpoint) localStorage.setItem("endpoint", endpoint.value.trim());
+  if(instruction) localStorage.setItem("instruction", instruction.value);
+  toast("Settings saved");
+}
+
+
+function makeQuiz(){
+  const box = document.getElementById("quizBox");
+  if(!box) return;
+  const c = document.getElementById("quizClass")?.value || localStorage.getItem("class") || "10";
+  const bank = (typeof QUIZ_BANK !== "undefined" && QUIZ_BANK[c]) ? QUIZ_BANK[c] :
+               (typeof quiz !== "undefined" ? quiz : []);
+  if(!bank.length){
+    box.innerHTML = '<div class="card"><h3>Quiz unavailable</h3><p class="muted">Questions for this class are being prepared.</p></div>';
+    return;
+  }
+  box.innerHTML = bank.map((x,i)=>{
+    const opts = x.options || x.o || [];
+    return `<div class="q card" data-answer="${Number(x.answer ?? x.a ?? 0)}">
+      <b>Q${i+1}. ${x.question || x.q}</b>
+      <div class="quiz-options">${opts.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("")}</div>
+      <div class="quiz-explain" id="exp${i}" hidden></div>
+    </div>`;
+  }).join("") + `<button class="btn" onclick="gradeQuiz()">Check Answers</button>
+  <div id="quizScore" class="card" style="margin-top:12px"></div>`;
+}
+function gradeQuiz(){
+  const box = document.getElementById("quizBox");
+  if(!box) return;
+  let score=0,total=0;
+  box.querySelectorAll(".q").forEach((q,i)=>{
+    total++;
+    const ans = Number(q.dataset.answer);
+    const picked = q.querySelector(`input[name="q${i}"]:checked`);
+    const exp = q.querySelector(".quiz-explain");
+    if(picked && Number(picked.value) === ans) score++;
+    if(exp){ exp.hidden=false; exp.textContent = picked && Number(picked.value)===ans ? "✓ Correct" : `Correct answer: ${ans+1}`; }
+  });
+  const s=document.getElementById("quizScore");
+  if(s) s.innerHTML=`<h3>Score: ${score}/${total}</h3><p>${Math.round(score/Math.max(total,1)*100)}%</p>`;
+}
+
+
+function demo(t){
+  const q = (t || "").trim();
+  if(!q) return "Apna question type karo.";
+  return "Demo AI Tutor: “"+q+"” ka answer dene ke liye backend endpoint Settings me add karo. Abhi StudyAI ka offline tutor mode active hai.";
+}
+
+function init(){
+  const ids=["subClass","noteClass","quizClass","setClass"];
+  ids.forEach(id=>{const el=document.getElementById(id); if(el) el.innerHTML=opts();});
+  const c=localStorage.getItem("class")||"10";
+  ids.forEach(id=>{const el=document.getElementById(id); if(el) el.value=c;});
+  document.getElementById("endpoint").value=localStorage.getItem("endpoint")||"https://studyai-backend-bqs8.onrender.com/api/chat";
+  if(!localStorage.getItem("endpoint")) localStorage.setItem("endpoint","https://studyai-backend-bqs8.onrender.com/api/chat");
+  document.getElementById("instruction").value=localStorage.getItem("instruction")||document.getElementById("instruction").value;
+  renderClasses(); renderSubjects(); renderNotes(); makeQuiz();
+  const sc=document.getElementById("subClass"), nc=document.getElementById("noteClass"), qc=document.getElementById("quizClass"), ns=document.getElementById("noteSubject");
+  if(sc) sc.onchange=renderSubjects; if(nc) nc.onchange=renderNotes; if(qc) qc.onchange=makeQuiz; if(ns) ns.onchange=renderNotes; if(noteClass) noteClass.onchange=renderNotes;
+  route();
+}
+function renderClasses(){const classCards=document.getElementById("classCards"); classCards.innerHTML=Object.keys(S).map(c=>`<div class="card click" onclick="pick('${c}')"><div class="icon">🎓</div><h3>Class ${c}</h3><p class="muted">${S[c].length} subjects</p></div>`).join("")}
+function pick(c){localStorage.setItem("class",c);setClass.value=c;subClass.value=c;noteClass.value=c;quizClass.value=c;classPill.textContent="Class "+c;renderSubjects();renderNotes();toast("Class "+c+" selected");location.hash="subjects"}
+function renderSubjects(){const subClass=document.getElementById("subClass"), subSearch=document.getElementById("subSearch"), subjectCards=document.getElementById("subjectCards"); let c=subClass.value,q=(subSearch.value||"").toLowerCase();subjectCards.innerHTML=S[c].filter(x=>x.toLowerCase().includes(q)).map(x=>`<div class="card click" onclick="openSubject('${x}')"><div class="icon">📘</div><h3>${x}</h3><p class="muted">Notes • Quiz • AI help</p></div>`).join("")}
+function openSubject(s){const noteSubject=document.getElementById("noteSubject"); noteSubject.value=s;renderNotes();location.hash="notes"}
+function renderNotes(){
+  const noteClass=document.getElementById("noteClass");
+  const noteSubject=document.getElementById("noteSubject");
+  const noteBox=document.getElementById("noteBox");
+  const c=noteClass.value;
+  const subject=noteSubject.value;
+  const chapters=REAL_NOTES_DATA[c]?.[subject] || {};
+  noteSubject.innerHTML=Object.keys(REAL_NOTES_DATA[c]||{}).map(s=>`<option>${s}</option>`).join("");
+  if(!chapters || Object.keys(chapters).length===0){
+    noteBox.innerHTML=`<div class="card"><h2>Notes coming for ${subject}</h2><p class="muted">Select another subject or add your own notes later.</p></div>`;
+    return;
+  }
+  const chosen=noteSubject.value;
+  const data=REAL_NOTES_DATA[c]?.[subject]?.[chosen] || Object.values(chapters)[0];
+  const title=REAL_NOTES_DATA[c]?.[subject] ? chosen : "Quick Notes";
+  noteBox.innerHTML=`<div class="lesson card">
+    <span class="pill">Class ${c} • ${subject}</span>
+    <h2>${title}</h2>
+    <p>${data}</p>
+    <div class="notice"><b>Exam tip:</b> Learn the definition/concept first, then practise examples and questions from this chapter.</div>
+    <h3>Quick Revision</h3>
+    <ul><li>Underline key terms and definitions.</li><li>Make 3–5 recall questions from this topic.</li><li>Attempt a chapter paper after revision.</li></ul>
+  </div>`;
+}
+addEventListener("hashchange",route);const chatText = document.getElementById("chatText");
+if (chatText) chatText.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}});
+const floatTextEl = document.getElementById("floatText");
+if (floatTextEl) floatTextEl.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();floatSend()}});
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded", init);}else{init();}
+</script>
+
+<script>
+const ncertMap={
+6:["Mathematics","Science","English","Hindi","Social Science","Sanskrit","Computer/Vocational"],
+7:["Mathematics","Science","English","Hindi","Social Science","Sanskrit","Computer"],
+8:["Mathematics","Science","English","Hindi","Social Science","Sanskrit","Computer"],
+9:["Mathematics","Science","English","Hindi","Social Science","Information Technology"],
+10:["Mathematics","Science","English","Hindi","Social Science","Information Technology"],
+11:["Physics","Chemistry","Mathematics","Biology","English","Computer Science","Economics","Accountancy","Business Studies"],
+12:["Physics","Chemistry","Mathematics","Biology","English","Computer Science","Economics","Accountancy","Business Studies"]
+};
+function fillExtraSelects(){
+ const o=Object.keys(ncertMap).map(c=>`<option>${c}</option>`).join("");
+ ["ncertClass","paperClass"].forEach(id=>{let e=document.getElementById(id);if(e)e.innerHTML=o});
+ let c=localStorage.getItem("class")||"10";["ncertClass","paperClass"].forEach(id=>{let e=document.getElementById(id);if(e)e.value=c});
+ updatePaperSubjects();renderNCERT();
+}
+function renderNCERT(){
+ let c=document.getElementById("ncertClass").value,q=(document.getElementById("ncertSearch").value||"").toLowerCase();
+ document.getElementById("ncertCards").innerHTML=ncertMap[c].filter(s=>s.toLowerCase().includes(q)).map(s=>`
+ <div class="card ncertCard">
+  <span class="tag">Class ${c}</span><h3>${s}</h3>
+  <p class="muted">Official textbook + StudyAI short notes + solutions + practice</p>
+  <div class="resourceRow">
+   <a class="btn" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">NCERT Book</a>
+   <button class="btn alt" onclick="openSubject('${s.replace(/'/g,"\\'")}')">Short Notes</button>
+  </div>
+ </div>`).join("");
+}
+function updatePaperSubjects(){
+ let c=document.getElementById("paperClass").value;
+ document.getElementById("paperSubject").innerHTML=(ncertMap[c]||[]).map(s=>`<option>${s}</option>`).join("");
+}
+function makePaper(){
+ let c=document.getElementById("paperClass").value,s=document.getElementById("paperSubject").value;
+ let qs=[
+  `Define the main idea of ${s} and give one example.`,
+  `Write two important concepts from the current chapter of ${s}.`,
+  `Solve/explain one application-based question related to ${s}.`,
+  `Write a short 3-mark answer on an important topic from ${s}.`,
+  `Give one common mistake students make in ${s} and how to avoid it.`
+ ];
+ document.getElementById("paperBox").innerHTML=`<div class="card"><h2>Class ${c} — ${s} Practice Paper</h2><p class="muted">Chapter-specific questions will be populated from your supplied notes/content. This starter paper keeps the structure ready.</p>${qs.map((q,i)=>`<div class="q"><b>Q${i+1}.</b> ${q}<p class="muted">Answer space / solution will appear here.</p></div>`).join("")}<button class="btn" onclick="window.print()">Print / Save PDF</button></div>`;
+}
+function appendMsg(containerId,text,cls){
+  const el=document.getElementById(containerId);
+  const div=document.createElement("div");
+  div.className="msg "+cls;
+  div.textContent=text;
+  el.appendChild(div);
+  el.scrollTop=el.scrollHeight;
+  return div;
+}
+function toggleFloatTutor(){let p=document.getElementById("tutorPop");p.style.display=p.style.display==="block"?"none":"block"}
+function floatExplain(){appendMsg("floatMsgs","The tutor will explain the currently selected topic. For true screen-aware explanation, connect the AI backend and pass the active page/chapter context to it.","bot")}
+function floatAsk(){document.getElementById("floatText").focus();appendMsg("floatMsgs","Bilkul. Apna doubt neeche likho.","bot")}
+async function floatSend(){
+ const input=document.getElementById("floatText");
+ let t=input.value.trim();if(!t)return;
+ input.value="";
+ appendMsg("floatMsgs",t,"me");
+ const thinking=appendMsg("floatMsgs","Thinking…","bot");
+ let ep=localStorage.getItem("endpoint");
+ if(!ep){thinking.textContent=demo(t);return}
+ try{let r=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:t,class:localStorage.getItem("class")||"10",screenContext:document.title+" | "+location.hash,systemPrompt:localStorage.getItem("instruction")||""})});let d=await r.json();thinking.textContent=d.reply||"No reply returned."}catch(e){thinking.textContent="AI backend connect nahi hua. Settings check karo."}
+ document.getElementById("floatMsgs").scrollTop=document.getElementById("floatMsgs").scrollHeight;
+}
+async function send(){
+ const input=document.getElementById("chatText");
+ let t=input.value.trim();if(!t)return;
+ input.value="";
+ appendMsg("msgs",t,"me");
+ const thinking=appendMsg("msgs","Thinking…","bot");
+ let ep=localStorage.getItem("endpoint");
+ if(!ep){thinking.textContent=demo(t);return}
+ try{let r=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:t,class:localStorage.getItem("class")||"10",screenContext:document.title+" | "+location.hash,systemPrompt:localStorage.getItem("instruction")||""})});let d=await r.json();thinking.textContent=d.reply||"No reply returned."}catch(e){thinking.textContent="AI backend connect nahi hua. Settings check karo."}
+ document.getElementById("msgs").scrollTop=document.getElementById("msgs").scrollHeight;
+}
+
+document.getElementById("paperClass").onchange=updatePaperSubjects;
+fillExtraSelects();
+document.getElementById("ncertClass").onchange=renderNCERT;
+</script>
+
+<script>
+(function(){
+  function setupStudyAIMenu(){
+    const btn=document.getElementById("menuBtn");
+    const drawer=document.getElementById("appDrawer");
+    const overlay=document.getElementById("drawerOverlay");
+    const close=document.getElementById("drawerClose");
+    const toggle=document.getElementById("darkToggle");
+    const search=document.getElementById("drawerSearch");
+
+    function open(){drawer.classList.add("open");overlay.classList.add("show");}
+    function shut(){drawer.classList.remove("open");overlay.classList.remove("show");}
+    btn && btn.addEventListener("click",open);
+    close && close.addEventListener("click",shut);
+    overlay && overlay.addEventListener("click",shut);
+
+    document.querySelectorAll(".drawerItem").forEach(item=>{
+      item.addEventListener("click",()=>{
+        const route=item.dataset.route;
+        if(route){ location.hash=route; }
+        shut();
+      });
+    });
+
+    const saved=localStorage.getItem("studyai-dark")==="1";
+    document.body.classList.toggle("dark",saved);
+    if(toggle) toggle.checked=saved;
+    toggle && toggle.addEventListener("change",()=>{
+      document.body.classList.toggle("dark",toggle.checked);
+      localStorage.setItem("studyai-dark",toggle.checked?"1":"0");
+    });
+
+    search && search.addEventListener("input",()=>{
+      const q=search.value.toLowerCase().trim();
+      document.querySelectorAll(".drawerItem").forEach(x=>{
+        x.style.display=x.textContent.toLowerCase().includes(q)?"flex":"none";
+      });
+    });
+
+    function sync(){
+      const h=location.hash.slice(1)||"home";
+      document.querySelectorAll(".drawerItem").forEach(x=>x.classList.toggle("active",x.dataset.route===h));
+    }
+    window.addEventListener("hashchange",sync);
+    sync();
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",setupStudyAIMenu);
+  else setupStudyAIMenu();
+})();
+</script>
+
+</body></html>
